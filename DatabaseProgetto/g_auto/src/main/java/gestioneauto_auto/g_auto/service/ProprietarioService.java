@@ -20,4 +20,37 @@ public class ProprietarioService {
     public Proprietario getProprietarioById(int id) {
         return proprietarioRepository.findById(id).orElse(null);
     }
+
+    public Proprietario getProprietarioByNome(String nome) {
+        return proprietarioRepository.findByNome(nome);
+    }
+
+    public Proprietario getProprietarioByCognome(String cognome) {
+        return proprietarioRepository.findByCognome(cognome);
+    }
+
+    public List<Proprietario> getProprietariByCognome(String cognome) {
+        return proprietarioRepository.getproprietariByCognome(cognome);
+    }
+
+    public Proprietario saveProprietario(Proprietario proprietario) {
+        return proprietarioRepository.save(proprietario);
+    }
+
+    public List<Proprietario> saveProprietari(List<Proprietario> proprietari) {
+        return proprietarioRepository.saveAll(proprietari);
+    }
+
+    public Proprietario updateProprietario(Proprietario proprietario) {
+        Proprietario ProprietarioMemorizzato = proprietarioRepository.findById(proprietario.getId()).orElse(null);
+        ProprietarioMemorizzato.setNome(proprietario.getNome());
+        ProprietarioMemorizzato.setCognome(proprietario.getCognome());
+        ProprietarioMemorizzato.setTelefono(proprietario.getTelefono());
+        return proprietarioRepository.save(ProprietarioMemorizzato);
+    }
+
+    public String deleteProprietario(int id) {
+        proprietarioRepository.deleteById(id);
+        return "Proprietario rimosso: " + id;
+    }
 }
